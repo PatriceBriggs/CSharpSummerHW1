@@ -1,0 +1,46 @@
+﻿@model School.Website.Models.HomePageModel
+
+@{
+    ViewBag.Title = "Class List";
+}
+
+<div>
+    <h3>Classes</h3>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4 classTitle">
+            Name
+        </div>
+        <div class="col-md-4 classTitle">
+            Description
+        </div>
+        <div class="col-md-4 classTitle">
+            Price
+        </div>
+    </div>
+    
+</div>
+
+<div class="row">
+    
+    @foreach (var myClass in Model.Classes)
+    {
+    <div class="col-md-12">
+        <hr>
+        <div class="col-md-4">
+            @myClass.ClassName
+        </div>
+        <div class="col-md-4">
+            @myClass.ClassDescription
+        </div>
+        <div class="col-md-4">
+            @myClass.ClassPrice
+        </div>
+        
+    </div>
+       
+        @*<a asp-action="classList"></a>*@
+    }
+</div>

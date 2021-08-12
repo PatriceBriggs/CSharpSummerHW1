@@ -1,0 +1,49 @@
+﻿@model School.Website.Models.HomePageModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    <h1 class="display-4">The Learning Center</h1>
+    <p>The place for technology classes.</p>
+</div>
+<button class="btn btn-primary">Learn more &#187;</button>
+
+<div class="container-fluid" style="margin-top:1rem;">
+
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-4">
+                <a class="mySelection" asp-action="classList">Class List</a>
+            </div>
+            <div class="col-md-4">
+                <a class="mySelection" href="">Your enrolled classes</a>
+            </div>
+            <div class="col-md-4">
+                <a class="mySelection" href="">Enroll in a class</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>See all our class offerings.</p>
+            </div>
+            <div class="col-md-4">
+                <p>See the classes you are enrolled in.</p>
+            </div>
+            <div class="col-md-4">
+                <p>Take a new class.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@*<div class="row">
+    @foreach (var myClass in Model.Classes)
+    {
+        <div class="col-md-4">
+            <h2><a asp-action="myClass" asp-route-id="@myClass.ClassId">@myClass.ClassName</a></h2>
+        </div>
+    }
+</div>*@
