@@ -10,18 +10,18 @@ namespace School.Repository.Models
         [Key]
         public int UserId { get; set; }
 
+        public string UserName { get; set; }
+
         public string UserEmail { get; set; }
 
         public string UserPassword { get; set; }
 
-        public bool UserIsAdmin { get; set; }
-
-        //public UserModel(int userId, string userEmail, string userPassword, bool userIsAdmin)
+        //public UserModel(int userId, string userName, string userEmail, string userPassword)
         //{
         //    UserId = userId;
+        //    UserName = userName
         //    UserEmail = userEmail;
         //    UserPassword = userPassword;
-        //    UserIsAdmin = userIsAdmin;
         //}
     }
 }

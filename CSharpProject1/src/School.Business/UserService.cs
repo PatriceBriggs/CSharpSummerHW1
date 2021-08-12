@@ -24,12 +24,12 @@ namespace School.Business
                 return null;
             }
 
-            return new UserModel { UserId = user.UserId, UserEmail = user.UserEmail };
+            return new UserModel { UserName = user.UserName, UserId = user.UserId, UserEmail = user.UserEmail };
         }
 
-        public UserModel Register(string email, string password)
+        public UserModel Register(string name, string email, string password)
         {
-            var user = schoolRepository.Register(email, password);
+            var user = schoolRepository.Register(name, email, password);
 
             if (user == null)
             {

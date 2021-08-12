@@ -10,6 +10,6 @@ namespace School.Repository
 
         UserModel LogIn(string email, string password);
 
-        UserModel Register(string email, string password);
+        UserModel Register(string name, string email, string password);
     }
 }

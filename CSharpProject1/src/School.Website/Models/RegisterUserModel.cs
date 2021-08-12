@@ -8,6 +8,10 @@ namespace School.Website.Models
 {
     public class RegisterUserModel
     {
+        [Required(ErrorMessage = "Name is required to register.")]
+        [Display(Name = "Name")]
+        public string UserName { get; set; }
+
         [Required(ErrorMessage = "Email is required to register.")]
         public string Email { get; set; }
 

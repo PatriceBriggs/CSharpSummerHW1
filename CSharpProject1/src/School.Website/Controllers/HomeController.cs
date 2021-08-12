@@ -102,12 +102,13 @@ namespace School.Website.Controllers
 
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "User name and password do not match.");
+                    ModelState.AddModelError("", "User email and password do not match.");
                 }
                 else
                 {
                     var json = JsonConvert.SerializeObject(new School.Website.Models.UserModel
                     {
+                        UserName =  user.UserName,
                         UserId = user.UserId,
                         Email = user.UserEmail,
                         Password = user.UserPassword
@@ -162,7 +163,7 @@ namespace School.Website.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = userService.Register(registerUserModel.Email, registerUserModel.Password);
+                var user = userService.Register(registerUserModel.UserName, registerUserModel.Email, registerUserModel.Password);
 
                 if (user == null)
                 {

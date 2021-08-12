@@ -54,3 +54,8 @@ input {
     font-size: 1.5rem;
     font-weight: 700;
 }
+
+#ClassListSL {
+    width: 350px !important;
+    height: 45px !important;
+}
