@@ -53,6 +53,10 @@ namespace School.DB
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.UserPassword)
                     .IsRequired()
                     .HasMaxLength(50)

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace School.Website.Models
+namespace School.Repository.Models
 {
-    public class StudentClassModel // One Class
+    public class StudentClassModel
     {
         public int UserId { get; set; }
 
@@ -16,7 +15,5 @@ namespace School.Website.Models
         public string ClassDescription { get; set; }
 
         public decimal ClassPrice { get; set; }
-
-        //public List<StudentClassModel>  StudentClasses { get; set; } // all classes for one student
     }
 }

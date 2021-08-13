@@ -15,6 +15,7 @@ namespace School.Website.Models
 
             public string ClassDescription { get; set; }
 
+            [UIHint("Currency")]        
             public decimal ClassPrice { get; set; }
 
             public int ClassSessions { get; set; }

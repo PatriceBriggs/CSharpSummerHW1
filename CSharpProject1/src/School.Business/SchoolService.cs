@@ -3,6 +3,7 @@ using School.Repository;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace School.Business
 {
@@ -45,6 +46,22 @@ namespace School.Business
                         "ClassId", "ClassName", selectedClass);
 
             return classListSL;
+        }
+
+        public List<StudentClassModel> GetClassesForStudent(int userId)
+        {
+            //List<StudentClassModel> studentClasses = schoolRepository.GetClassesForStudent(UserId);
+
+            return schoolRepository.GetClassesForStudent(userId)
+                        .Select(c =>
+                             new StudentClassModel
+                             {
+                                 UserId = c.UserId,
+                                 ClassId = c.ClassId,
+                                 ClassName = c.ClassName,
+                                 ClassDescription = c.ClassDescription
+                             })
+                        .ToList();
         }
     }
 }

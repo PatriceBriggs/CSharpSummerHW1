@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -73,19 +74,19 @@ namespace School.Website.Controllers
 
         }
 
-        //public IActionResult About()
-        //{
-        //    ViewData["Message"] = "Your application description page.";
+        public IActionResult About()
+        {
+            ViewData["Message"] = "About us.";
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        //public IActionResult Contact()
-        //{
-        //    ViewData["Message"] = "Your contact page.";
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
 
-        //    return View();
-        //}
+            return View();
+        }
 
         public ActionResult LogIn()
         {
@@ -178,7 +179,7 @@ namespace School.Website.Controllers
             return View();
         }
 
-
+        [Authorize]
         public IActionResult EnrollInClass()
         {
 
@@ -193,6 +194,38 @@ namespace School.Website.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult EnrollInClass(int classId)
+        {
+
+            
+
+
+            return View();
+        }
+
+
+        public IActionResult StudentClass(int userId)
+        {
+            //figure out how to get userId from Session user variable?  or, is it passed in?
+            userId = 2;
+
+            //Get the classes for this userId
+            //List<StudentClassModel> studentClasses = new List<StudentClassModel>();
+            //studentClasses = schoolService.GetClassesForStudent(userId);
+
+            var studentClasses = schoolService.GetClassesForStudent(userId)
+                        .Select(c => new School.Website.Models.StudentClassModel
+                        {
+                            UserId = c.UserId,
+                            ClassId = c.ClassId,
+                            ClassName = c.ClassName,
+                            ClassDescription = c.ClassDescription
+                        })
+                        .ToList();
+
+            return View(studentClasses);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

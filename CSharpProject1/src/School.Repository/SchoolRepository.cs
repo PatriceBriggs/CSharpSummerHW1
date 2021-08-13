@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using School.Repository.Models;
+using System.Data.SqlClient;
 
 namespace School.Repository
 {
@@ -81,6 +82,38 @@ namespace School.Repository
             DatabaseAccessor.Instance.SaveChanges();
 
             return new UserModel { UserId = user.Entity.UserId, UserEmail = user.Entity.UserEmail };
+        }
+
+
+        public List<StudentClassModel> GetClassesForStudent(int userId)
+        {
+            //check for valid user
+            var userFound = DatabaseAccessor
+                .Instance
+                .User
+                .FirstOrDefault(u => u.UserId == userId);
+
+            if (userFound != null)
+            {
+                return null;
+            }
+
+            // now get classes for this user
+            SqlParameter prmUserId = new SqlParameter("userId", userId);
+            //List<StudentClassModel> studentClasses = _context.Database.SqlQuery<AlertReportFormat>("_sp_GetAlertReportFormatInfo @clientAlertID", prmClientAlertID).FirstOrDefault();
+            //if (alertReportFormat != null)
+            //{
+            //    model.IsDetailRowsIncluded = alertReportFormat.IncludeDetailRows;
+            //    model.IsTopRowTotalsIncluded = alertReportFormat.IncludeTopRowTotals;
+            //    model.IncludeZeroValueMatters = alertReportFormat.IncludeZeroValueMatters;
+            //    model.ExcludeZeroValueMatters = alertReportFormat.ExcludeZeroValueMatters;
+            //}
+
+            //DatabaseAccessor.Instance.Query<>
+
+            List<StudentClassModel> studentClasses = new List<StudentClassModel>();
+            return studentClasses;
+
         }
     }
 }

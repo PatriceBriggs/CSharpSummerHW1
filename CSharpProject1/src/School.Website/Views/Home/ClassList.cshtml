@@ -36,11 +36,10 @@
             @myClass.ClassDescription
         </div>
         <div class="col-md-4">
-            @myClass.ClassPrice
+            @String.Format("{0:c}", @myClass.ClassPrice)
         </div>
         
     </div>
        
-        @*<a asp-action="classList"></a>*@
-    }
+}
 </div>

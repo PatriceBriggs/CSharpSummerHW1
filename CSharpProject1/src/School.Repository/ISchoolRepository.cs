@@ -1,4 +1,5 @@
 ﻿using School.Repository.Models;
+using System.Collections.Generic;
 
 namespace School.Repository
 {
@@ -11,5 +12,7 @@ namespace School.Repository
         UserModel LogIn(string email, string password);
 
         UserModel Register(string name, string email, string password);
+      
+        List<StudentClassModel> GetClassesForStudent(int userId);
     }
 }
