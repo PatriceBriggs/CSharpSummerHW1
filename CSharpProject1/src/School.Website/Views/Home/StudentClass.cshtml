@@ -1,0 +1,35 @@
+﻿@model IEnumerable<School.Website.Models.StudentClassModel>
+
+@{
+    ViewData["Title"] = "Your Classes";
+}
+<h1>Your Classes</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassPrice)
+        </th>        
+    </tr>
+
+    @foreach (var oneClass in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => oneClass.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => oneClass.ClassDescription)
+            </td>
+            <td>
+                @String.Format("{0:c} ", oneClass.ClassPrice)
+            </td>
+        </tr>
+    }
+</table>

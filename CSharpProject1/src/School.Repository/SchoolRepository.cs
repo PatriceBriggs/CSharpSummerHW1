@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using School.Repository.Models;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace School.Repository
 {
@@ -93,25 +94,44 @@ namespace School.Repository
                 .User
                 .FirstOrDefault(u => u.UserId == userId);
 
-            if (userFound != null)
+            if (userFound == null)
             {
                 return null;
             }
 
             // now get classes for this user
             SqlParameter prmUserId = new SqlParameter("userId", userId);
-            //List<StudentClassModel> studentClasses = _context.Database.SqlQuery<AlertReportFormat>("_sp_GetAlertReportFormatInfo @clientAlertID", prmClientAlertID).FirstOrDefault();
-            //if (alertReportFormat != null)
+            //List<UserClassModel> studentClasses = DatabaseAccessor.Instance.Database.SqlQuery<UserClassModel>("_sp_GetClassesForStudent @userId", prmUserId).ToLIst();
+            //if (studentClasses != null)
             //{
-            //    model.IsDetailRowsIncluded = alertReportFormat.IncludeDetailRows;
-            //    model.IsTopRowTotalsIncluded = alertReportFormat.IncludeTopRowTotals;
-            //    model.IncludeZeroValueMatters = alertReportFormat.IncludeZeroValueMatters;
-            //    model.ExcludeZeroValueMatters = alertReportFormat.ExcludeZeroValueMatters;
+            //    UserId = userId,
+            //    ClassId = studentClass.IncludeDetailRows,
+            //    ClassName = studentClass.ClassName,
+            //    ClassDescription = studentClass.ClassDescription,
+            //    ClassPrice = studentClass.ClassPrice,
             //}
 
-            //DatabaseAccessor.Instance.Query<>
+            List<School.DB.UserClass> classes = DatabaseAccessor.Instance.UserClass.Where(u => u.UserId == userId).ToList();
 
             List<StudentClassModel> studentClasses = new List<StudentClassModel>();
+            foreach (School.DB.UserClass myClass in classes){
+                var oneClass = DatabaseAccessor.Instance.ClassMaster.Where(c => c.ClassId == myClass.ClassId).FirstOrDefault(); ;
+
+                StudentClassModel studentClass = new StudentClassModel();
+
+                studentClass = new StudentClassModel
+                {
+                    UserId = userId,
+                    ClassId = oneClass.ClassId,
+                    ClassName = oneClass.ClassName,
+                    ClassDescription = oneClass.ClassDescription,
+                    ClassPrice = oneClass.ClassPrice
+                };
+
+                studentClasses.Add(studentClass);                                       
+            }
+
+            
             return studentClasses;
 
         }

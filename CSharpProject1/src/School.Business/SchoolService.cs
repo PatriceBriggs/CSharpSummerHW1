@@ -50,8 +50,6 @@ namespace School.Business
 
         public List<StudentClassModel> GetClassesForStudent(int userId)
         {
-            //List<StudentClassModel> studentClasses = schoolRepository.GetClassesForStudent(UserId);
-
             return schoolRepository.GetClassesForStudent(userId)
                         .Select(c =>
                              new StudentClassModel
@@ -59,7 +57,8 @@ namespace School.Business
                                  UserId = c.UserId,
                                  ClassId = c.ClassId,
                                  ClassName = c.ClassName,
-                                 ClassDescription = c.ClassDescription
+                                 ClassDescription = c.ClassDescription,
+                                 ClassPrice = c.ClassPrice
                              })
                         .ToList();
         }

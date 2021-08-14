@@ -211,16 +211,14 @@ namespace School.Website.Controllers
             userId = 2;
 
             //Get the classes for this userId
-            //List<StudentClassModel> studentClasses = new List<StudentClassModel>();
-            //studentClasses = schoolService.GetClassesForStudent(userId);
-
             var studentClasses = schoolService.GetClassesForStudent(userId)
                         .Select(c => new School.Website.Models.StudentClassModel
                         {
                             UserId = c.UserId,
                             ClassId = c.ClassId,
                             ClassName = c.ClassName,
-                            ClassDescription = c.ClassDescription
+                            ClassDescription = c.ClassDescription,
+                            ClassPrice = c.ClassPrice
                         })
                         .ToList();
 
