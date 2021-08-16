@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using School.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+using System.ComponentModel.DataAnnotations;
+
 
 namespace School.Website.Models
 {
     public class EnrollViewModel
     {
-
+        [Display(Name = "Class List")]
         public SelectList ClassListSL { get; set; }
 
 

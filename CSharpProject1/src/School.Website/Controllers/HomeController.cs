@@ -58,7 +58,6 @@ namespace School.Website.Controllers
             var classList = schoolService.Classes;
 
             // convert to School.Website.Model.ClassMasterModel[]
-
             var myClassList = classList
                                         .Select(c => new ClassMasterModel
                                         {
@@ -107,6 +106,7 @@ namespace School.Website.Controllers
                 }
                 else
                 {
+                    // Create json for user session variable
                     var json = JsonConvert.SerializeObject(new School.Website.Models.UserModel
                     {
                         UserName =  user.UserName,
@@ -115,6 +115,7 @@ namespace School.Website.Controllers
                         Password = user.UserPassword
                     });
 
+                    // Set User session variable
                     HttpContext.Session.SetString("User", json);
 
                     var claims = new List<Claim>
@@ -182,10 +183,10 @@ namespace School.Website.Controllers
         [Authorize]
         public IActionResult EnrollInClass()
         {
-
+            // Get list of all Classes
             SelectList classListSL = schoolService.PopulateClassesDropDownList();
             
-            // create the EnrollViewModel
+            // create the EnrollViewModel with list of all classes
             var model = new EnrollViewModel
             {
                 ClassListSL = classListSL
@@ -195,11 +196,10 @@ namespace School.Website.Controllers
         }
 
         [HttpPost]
-        public IActionResult EnrollInClass(int classId)
+        public IActionResult EnrollInClass(int classid)
         {
             var user = JsonConvert.DeserializeObject<Models.UserModel>(HttpContext.Session.GetString("User"));
-            schoolService.AddClassForUser(user.UserId, classId);
-
+            schoolService.AddClassForUser(user.UserId, classid);
 
             return RedirectToAction("StudentClass");
 
@@ -208,7 +208,7 @@ namespace School.Website.Controllers
         [Authorize]
         public IActionResult StudentClass()
         {
-  
+            // use session variable to get the user
             var user = JsonConvert.DeserializeObject<Models.UserModel>(HttpContext.Session.GetString("User"));
 
             //Get the classes for this userId

@@ -87,7 +87,7 @@ namespace School.Repository
 
         public static void AddClassForUser(int userId, int classId)
         {
-            // check if already registered for this class
+            // check if user is already registered for this class
             var classFound = DatabaseAccessor
                             .Instance
                             .UserClass
@@ -95,7 +95,6 @@ namespace School.Repository
             if (classFound == null)
             {
                 // add class
-
                 var userClass = DatabaseAccessor.Instance.UserClass
                             .Add(new School.DB.UserClass
                             {

@@ -28,6 +28,7 @@ namespace School.Business
 
         public ClassMasterModel ClassMaster(int classId)
         {
+            // Get info for one class
             var classMasterModel = schoolRepository.ClassMaster(classId);
             return new ClassMasterModel(classMasterModel.ClassId, classMasterModel.ClassName, classMasterModel.ClassDescription,
                                         classMasterModel.ClassPrice, classMasterModel.ClassSessions);
