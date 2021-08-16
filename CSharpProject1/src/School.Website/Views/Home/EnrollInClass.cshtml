@@ -6,7 +6,7 @@
 <h1>Enroll In Class.</h1>
 
 <hr />
-<form asp-action="EnrollInClass">
+<form id="formEnroll" asp-action="EnrollInClass">
     <div class="form-group">
         <label asp-for="ClassListSL" class="control-label"></label>
         <select asp-for="ClassListSL" class="form-control classDropDown"
@@ -27,7 +27,8 @@
 <script>
     $(document).ready(function () {
         $('select').change(function () {
-            $('form').attr('asp-route-classid', $(this).children('option:selected').val());
+            // update the form action with the selected classid
+            $('#formEnroll').attr('action', '/Home/EnrollInClass?classid=' + $(this).children('option:selected').val());
         })
     })
 </script>
