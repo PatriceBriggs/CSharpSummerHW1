@@ -9,29 +9,29 @@ namespace School.Business
 {
     public class SchoolService : ISchoolService
     {
-            private readonly ISchoolRepository schoolRepository;
+        private readonly ISchoolRepository schoolRepository;
 
-            public SchoolService(ISchoolRepository schoolRepository)
-            {
-                this.schoolRepository = schoolRepository;
-            }
+        public SchoolService(ISchoolRepository schoolRepository)
+        {
+            this.schoolRepository = schoolRepository;
+        }
 
-            public ClassMasterModel[] Classes
+        public ClassMasterModel[] Classes
+        {
+            get
             {
-                get
-                {
-                    return schoolRepository.Classes
-                                             .Select(c => new ClassMasterModel(c.ClassId, c.ClassName, c.ClassDescription, c.ClassPrice, c.ClassSessions))
-                                             .ToArray();
-                }
+                return schoolRepository.Classes
+                                         .Select(c => new ClassMasterModel(c.ClassId, c.ClassName, c.ClassDescription, c.ClassPrice, c.ClassSessions))
+                                         .ToArray();
             }
+        }
 
-            public ClassMasterModel ClassMaster(int classId)
-            {
-                var classMasterModel = schoolRepository.ClassMaster(classId);
-                return new ClassMasterModel(classMasterModel.ClassId, classMasterModel.ClassName, classMasterModel.ClassDescription,
-                                            classMasterModel.ClassPrice, classMasterModel.ClassSessions);
-            }
+        public ClassMasterModel ClassMaster(int classId)
+        {
+            var classMasterModel = schoolRepository.ClassMaster(classId);
+            return new ClassMasterModel(classMasterModel.ClassId, classMasterModel.ClassName, classMasterModel.ClassDescription,
+                                        classMasterModel.ClassPrice, classMasterModel.ClassSessions);
+        }
 
         public SelectList PopulateClassesDropDownList()
         {
@@ -62,6 +62,14 @@ namespace School.Business
                              })
                         .ToList();
         }
+
+        public void AddClassForUser(int userId, int classId)
+        {
+            SchoolRepository.AddClassForUser(userId, classId);
+            return;
+
+        }
+
     }
 }
 

@@ -85,6 +85,28 @@ namespace School.Repository
             return new UserModel { UserId = user.Entity.UserId, UserEmail = user.Entity.UserEmail };
         }
 
+        public static void AddClassForUser(int userId, int classId)
+        {
+            // check if already registered for this class
+            var classFound = DatabaseAccessor
+                            .Instance
+                            .UserClass
+                            .FirstOrDefault(c => c.UserId == userId && c.ClassId == classId);
+            if (classFound == null)
+            {
+                // add class
+
+                var userClass = DatabaseAccessor.Instance.UserClass
+                            .Add(new School.DB.UserClass
+                            {
+                                ClassId = classId,
+                                UserId = userId
+                            });
+                DatabaseAccessor.Instance.SaveChanges();
+            }
+
+            return;
+        }
 
         public List<StudentClassModel> GetClassesForStudent(int userId)
         {

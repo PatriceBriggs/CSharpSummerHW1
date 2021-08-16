@@ -16,12 +16,5 @@ namespace School.Business.Models
 
         public string UserPassword { get; set; }
 
-        //public UserModel(int userId, string userEmail, string userPassword, bool userIsAdmin)
-        //{
-        //    UserId = userId;
-        //    UserEmail = userEmail;
-        //    UserPassword = userPassword;
-        //    UserIsAdmin = userIsAdmin;
-        //}
     }
 }

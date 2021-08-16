@@ -17,5 +17,7 @@ namespace School.Business
         SelectList PopulateClassesDropDownList();
 
         List<StudentClassModel> GetClassesForStudent(int userId);
+
+        void AddClassForUser(int userId, int classId);
     }
 }

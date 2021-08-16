@@ -197,21 +197,22 @@ namespace School.Website.Controllers
         [HttpPost]
         public IActionResult EnrollInClass(int classId)
         {
+            var user = JsonConvert.DeserializeObject<Models.UserModel>(HttpContext.Session.GetString("User"));
+            schoolService.AddClassForUser(user.UserId, classId);
 
-            
 
+            return RedirectToAction("StudentClass");
 
-            return View();
         }
 
-
-        public IActionResult StudentClass(int userId)
+        [Authorize]
+        public IActionResult StudentClass()
         {
-            //figure out how to get userId from Session user variable?  or, is it passed in?
-            userId = 2;
+  
+            var user = JsonConvert.DeserializeObject<Models.UserModel>(HttpContext.Session.GetString("User"));
 
             //Get the classes for this userId
-            var studentClasses = schoolService.GetClassesForStudent(userId)
+            var studentClasses = schoolService.GetClassesForStudent(user.UserId)
                         .Select(c => new School.Website.Models.StudentClassModel
                         {
                             UserId = c.UserId,
@@ -228,6 +229,16 @@ namespace School.Website.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public ActionResult LogOff()
+        {
+            HttpContext.Session.Remove("User");
+
+            HttpContext.SignOutAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return Redirect("~/");
         }
     }
 }
