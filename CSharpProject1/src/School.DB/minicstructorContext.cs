@@ -24,7 +24,7 @@ namespace School.DB
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=pjbuw-sv.database.windows.net;Initial Catalog=mini-cstructor;User Id=pjbadmin;Password=Dressel1!");
+                optionsBuilder.UseSqlServer("Data Source=pjbuw-sv.database.windows.net;Initial Catalog=mini-cstructor;User Id=********;Password=*******");
             }
         }
 
